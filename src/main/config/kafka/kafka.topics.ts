@@ -1,3 +1,3 @@
 export const Topics = {
-    MEASURE: 'measure'
+    ACTUATOR: 'actuator'
 }

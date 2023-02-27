@@ -15,7 +15,7 @@ export class KafkaConsumer implements Consumer {
         if (consumer) return consumer
         consumer = this.kafkaServer.consumer({ groupId: env.kafkaGroupId })
         await consumer.connect()
-        await consumer.subscribe({ topic: Topics.MEASURE, fromBeginning: true })
+        await consumer.subscribe({ topic: Topics.ACTUATOR, fromBeginning: true })
         await consumer.run({
             eachMessage: async ({ topic, partition, message }) => {
                 try {
