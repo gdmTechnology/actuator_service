@@ -1,5 +1,5 @@
 export default {
-  port: process.env.PORT || 3003,
+  port: process.env.PORT || 3006,
   jwtSecret: process.env.JWT_SECRET || '1kZDnw8==jh',
   mongoUrl: `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB_NAME}?authSource=admin` || 'mongodb://rem:rem2023@mongo:27017/rem?authSource=admin',
   adminEmail: process.env.ADMIN_EMAIL || 'gui.acassemiro@gmail.com',
@@ -11,5 +11,5 @@ export default {
   kafkaClientId: process.env.KAFKA_CLIENTID || 'rem-kafka',
   kafkaBrokerPort: process.env.KAFKA_BROKER_PORT || 9092,
   kafkaBrokerHost: process.env.KAFKA_BROKER_HOST || 'broker',
-  kafkaGroupId: process.env.KAFKA_GROUP_ID || 'sensor-service'
+  kafkaGroupId: process.env.KAFKA_GROUP_ID || 'actuator-service'
 }
