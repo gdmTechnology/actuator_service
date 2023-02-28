@@ -13,7 +13,7 @@ export class DbUpdateActuator implements UpdateActuator {
         if (!actuator) {
             const appError = new ApplicationError(
                 Constants.NotFoundActuator.error,
-                Constants.NotFoundActuator.message
+                Constants.NotFoundActuator
             )
             return error(appError)
         }
