@@ -20,7 +20,7 @@ export class ActuatorMongoRepository implements SaveActuatorRepository, UpdateAc
         actuatorCurrentValue === undefined && delete update.actuatorCurrentValue
         actuatorTimeStamp === undefined && delete update.actuatorTimeStamp
         const option = { new: true }
-        const result = ActuatorModel.findOneAndUpdate(filter, update, option).lean()
+        const result = await ActuatorModel.findOneAndUpdate(filter, update, option).lean()
         return result
     }
 
