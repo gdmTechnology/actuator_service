@@ -16,6 +16,12 @@ export class DbUpdateActuator implements UpdateActuator {
                 Constants.NotFoundActuator
             )
             return error(appError)
+        } else if (actuator.code === 11000) {
+            const appError = new ApplicationError(
+                Constants.DuplicateError.error,
+                Constants.DuplicateError
+            )
+            return error(appError)
         }
         return success(actuator)
     }

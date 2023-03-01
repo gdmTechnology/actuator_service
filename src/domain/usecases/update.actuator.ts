@@ -26,5 +26,6 @@ export namespace UpdateActuator {
         actuatorTimeStamp: string
         createdAt: Date
         updatedAt: Date
+        code?: number
     }
 }

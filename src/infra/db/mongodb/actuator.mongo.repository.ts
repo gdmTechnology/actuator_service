@@ -13,15 +13,19 @@ export class ActuatorMongoRepository implements SaveActuatorRepository, UpdateAc
     }
 
     async update(data: UpdateActuatorRepository.Params): Promise<UpdateActuatorRepository.Result> {
-        const { deviceIdentification, actuatorName, actuatorTimeStamp, actuatorCurrentValue } = data
-        const filter = { deviceIdentification }
-        const update: any = { actuatorName, actuatorTimeStamp, actuatorCurrentValue }
-        actuatorName === undefined && delete update.actuatorName
-        actuatorCurrentValue === undefined && delete update.actuatorCurrentValue
-        actuatorTimeStamp === undefined && delete update.actuatorTimeStamp
-        const option = { new: true }
-        const result = await ActuatorModel.findOneAndUpdate(filter, update, option).lean()
-        return result
+        try {
+            const { deviceIdentification, actuatorName, actuatorTimeStamp, actuatorCurrentValue } = data
+            const filter = { deviceIdentification }
+            const update: any = { actuatorName, actuatorTimeStamp, actuatorCurrentValue }
+            actuatorName === undefined && delete update.actuatorName
+            actuatorCurrentValue === undefined && delete update.actuatorCurrentValue
+            actuatorTimeStamp === undefined && delete update.actuatorTimeStamp
+            const option = { new: true }
+            const result = await ActuatorModel.findOneAndUpdate(filter, update, option).lean()
+            return result
+        } catch (error) {
+            return error
+        }
     }
 
     async list(actuatorTenantId: string): Promise<GetActuatorsListRepository.Result[]> {
