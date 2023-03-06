@@ -9,6 +9,10 @@ export const Constants = {
     },
     NotFoundActuator: {
         error: 'NotFoundActuatorError',
-        message: 'Not found actuator identification.'
+        message: 'Not found acutuator identification.'
+    },
+    NotFoundDevice: {
+        error: 'NotFoundDevice',
+        message: 'Invalid device identification.'
     }
 }

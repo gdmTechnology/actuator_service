@@ -8,11 +8,11 @@ export class GetActuatorsListController implements Controller {
         private readonly getActuatorsList: GetActuatorsList
     ) { }
 
-    async handle({ actuatorTenantId }): Promise<any> {
+    async handle(data): Promise<any> {
         try {
-            const error = this.validation.validate({ actuatorTenantId })
+            const error = this.validation.validate(data)
             if (error) return badRequest(error)
-            const actuatorsList = await this.getActuatorsList.handle(actuatorTenantId)
+            const actuatorsList = await this.getActuatorsList.handle(data.actuatorTenantId)
             if (actuatorsList.isError()) return badRequest(actuatorsList.value.details)
             return ok(actuatorsList.value)
         } catch (error) {
