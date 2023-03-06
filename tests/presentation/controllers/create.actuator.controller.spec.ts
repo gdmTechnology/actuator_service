@@ -1,4 +1,4 @@
-import { ValidationSpy, CreateActuatorSpy } from '../mocks'
+import { ValidationSpy, CreateActuatorSpy, GetDeviceSpy } from '../mocks'
 import { CreateActuatorController } from '@/presentation/controllers'
 import { ApplicationError, error } from '@/domain/protocols'
 const throwError = (): never => {
@@ -8,16 +8,19 @@ const throwError = (): never => {
 type SutTypes = {
     validationSpy: ValidationSpy
     createActuatorSpy: CreateActuatorSpy
+    getDeviceSpy: GetDeviceSpy
     sut: CreateActuatorController
 }
 
 const mockSut = (): SutTypes => {
     const validationSpy = new ValidationSpy()
     const createActuatorSpy = new CreateActuatorSpy()
-    const sut = new CreateActuatorController(validationSpy, createActuatorSpy)
+    const getDeviceSpy = new GetDeviceSpy()
+    const sut = new CreateActuatorController(validationSpy, createActuatorSpy, getDeviceSpy)
     return {
         validationSpy,
         createActuatorSpy,
+        getDeviceSpy,
         sut
     }
 }
@@ -88,6 +91,33 @@ describe('ActuatorController', () => {
         const { sut, createActuatorSpy } = mockSut()
         const request = mockRequest()
         jest.spyOn(createActuatorSpy, 'handle').mockImplementationOnce(throwError)
+        const httpResponse = await sut.handle(request)
+        expect(httpResponse.statusCode).toBe(500)
+    })
+
+    test('Should call GetDevice with correct value', async () => {
+        const { sut, getDeviceSpy } = mockSut()
+        const request = mockRequest()
+        await sut.handle(request)
+        expect(getDeviceSpy.params).toEqual(request.deviceIdentification)
+    })
+
+    test('Should return 400 if GetDevice fails', async () => {
+        const { sut, getDeviceSpy } = mockSut()
+        const appError: ApplicationError = new ApplicationError(
+            '',
+            ''
+        )
+        getDeviceSpy.result = error(appError)
+        const request = mockRequest()
+        const httpResponse = await sut.handle(request)
+        expect(httpResponse.statusCode).toBe(400)
+    })
+
+    test('Should return 500 if GetDevice throws', async () => {
+        const { sut, getDeviceSpy } = mockSut()
+        const request = mockRequest()
+        jest.spyOn(getDeviceSpy, 'handle').mockImplementationOnce(throwError)
         const httpResponse = await sut.handle(request)
         expect(httpResponse.statusCode).toBe(500)
     })

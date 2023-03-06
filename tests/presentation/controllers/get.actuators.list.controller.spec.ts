@@ -22,14 +22,14 @@ const mockSut = (): SutTypes => {
     }
 }
 
-const mockRequest = (): any => 'tenantId'
+const mockRequest = (): any => ({ actuatorTenantId: 'actuatorTenantId' })
 
 describe('GetActuatorsListController', () => {
     test('Should call Validation with correct values', async () => {
         const { sut, validationSpy } = mockSut()
         const request = mockRequest()
         await sut.handle(request)
-        expect(validationSpy.input).toEqual({ tenantId: 'tenantId' })
+        expect(validationSpy.input).toEqual({ actuatorTenantId: 'actuatorTenantId' })
     })
 
     test('Should return 400 if validation fails', async () => {
@@ -52,7 +52,7 @@ describe('GetActuatorsListController', () => {
         const { sut, getActuatorsListSpy } = mockSut()
         const request = mockRequest()
         await sut.handle(request)
-        expect(getActuatorsListSpy.params).toEqual(request)
+        expect(getActuatorsListSpy.params).toEqual('actuatorTenantId')
     })
 
     test('Should return 400 if GetActuatorsList fails', async () => {
