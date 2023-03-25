@@ -14,8 +14,8 @@ export class ActuatorMongoRepository implements SaveActuatorRepository, UpdateAc
 
     async update(data: UpdateActuatorRepository.Params): Promise<UpdateActuatorRepository.Result> {
         try {
-            const { deviceIdentification, actuatorName, actuatorTimeStamp, actuatorCurrentValue } = data
-            const filter = { deviceIdentification }
+            const { deviceIdentification, actuatorIdentification, actuatorName, actuatorTimeStamp, actuatorCurrentValue } = data
+            const filter = { deviceIdentification, actuatorIdentification }
             const update: any = { actuatorName, actuatorTimeStamp, actuatorCurrentValue }
             actuatorName === undefined && delete update.actuatorName
             actuatorCurrentValue === undefined && delete update.actuatorCurrentValue

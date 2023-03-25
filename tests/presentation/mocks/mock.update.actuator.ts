@@ -7,8 +7,6 @@ export class UpdateActuatorSpy implements UpdateActuator {
         actuatorIdentification: 'actuatorIdentification',
         actuatorTenantId: 'actuatorTenantId',
         actuatorName: 'actuatorName',
-        actuatorEquipment: 'actuatorEquipment',
-        actuatorMeasureType: 'actuatorMeasureType',
         actuatorCurrentValue: 0,
         actuatorTimeStamp: 'actuatorTimeStamp',
         createdAt: 'createdAt',
