@@ -1,3 +1,4 @@
 export const Topics = {
-    ACTUATOR: 'actuator'
+    ACTUATOR: 'actuator',
+    SEND_COMMAND: 'send-command'
 }
