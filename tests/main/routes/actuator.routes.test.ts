@@ -44,7 +44,7 @@ const actuatorParms = (): any => ({
     actuatorIdentification: 'actuatorIdentification',
     actuatorTenantId: 'actuatorTenantId',
     actuatorName: 'actuatorName',
-    actuatorCurrentValue: 0,
+    actuatorCurrentValue: 10, // de valor for 0, retorna validation error (ARRUMAR)
     actuatorTimeStamp: 'actuatorTimeStamp'
 })
 
