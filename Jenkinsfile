@@ -18,7 +18,7 @@ pipeline {
 			}
 			post {
 				always {
-				step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/clover.xml', lineCoverageTargets: '100, 95, 50'])
+				step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml', lineCoverageTargets: '100, 95, 50'])
 				}
 			}
 		}
@@ -30,6 +30,11 @@ pipeline {
 		stage("build") {
 			steps {
 				sh 'docker build -t actuator-service .'
+			}
+		}
+		stage("Killing unused containers") {
+			steps {
+				sh 'docker system prune --all'
 			}
 		}
 		stage("run") {
@@ -50,9 +55,9 @@ pipeline {
 					-e MONGO_USER=rem \
 					-p 3006:3006 \
 					--hostname actuator_service \
-                    --network middleware-network \
+                    --network rem-network \
 					--restart always \
-					--name actuator_service actuator_service
+					--name actuator_service actuator-service
 				'''
 			}
 		}
