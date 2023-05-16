@@ -22,11 +22,6 @@ pipeline {
 				}
 			}
 		}
-		stage("killing old container") {
-			steps {
-				sh 'sudo docker system prune --all'
-			}
-		}
 		stage("build") {
 			steps {
 				sh 'docker build -t actuator-service .'
