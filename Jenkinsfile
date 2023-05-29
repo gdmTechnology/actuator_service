@@ -71,7 +71,7 @@ pipeline {
 					-e MONGO_USER=rem \
 					-p 3006:3006 \
 					--hostname actuator_service \
-                    --network rem-network \
+                    --network rem_network \
 					--restart always \
 					--name actuator_service actuator-service
 				'''
